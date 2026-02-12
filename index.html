@@ -1,74 +1,201 @@
-<script>
-    const duraklar = {
-        1: {
-            baslik: "1. Durak: Bilir O Beni",
-            mesaj: "Günaydın aşkım... Çok uzaktayım ama görür o beni. Mesafeler sevgimize engel değil, yolculuğumuz başlıyor.",
-            videoID: "LZnXSIQdvhs" 
-        },
-        2: {
-            baslik: "2. Durak: Keşke",
-            mesaj: "Keşke şu an yanında olabilseydim... Bu şarkı içimdeki o en saf 'yanında olma' isteği.",
-            videoID: "_fw5GJdAbLY"
-        },
-        3: {
-            baslik: "3. Durak: Belki Üstümüzden Bir Kuş Geçer",
-            mesaj: "Hüzün yok, umut var. Hayat akıyor ve biz elbet o kuşun kanadında buluşacağız.",
-            videoID: "Ql8W_4wS9xc"
-        },
-        4: {
-            baslik: "4. Durak: Dillere Düşeceğiz",
-            mesaj: "Enerjini düşürme! Herkes bizi, aşkımızı konuşsun. Gülümse biraz :)",
-            videoID: "nYX-r6nvnNA"
-        },
-        5: {
-            baslik: "5. Durak: Ara Beni Lütfen",
-            mesaj: "Tatlı bir sitem, minik bir oyun... Sesini duymak her şeye bedel.",
-            videoID: "8McL3RNwaDY"
-        },
-        6: {
-            baslik: "6. Durak: Senden Daha Güzel",
-            mesaj: "Lütfen şu an kamerayı aç ve aynaya bak. Çünkü bu dünyada, senden daha güzelini bulamadım.",
-            videoID: "ItISVW3o0X0"  /* <-- Duman Şarkısı (Düzeltildi) */
-        },
-        7: {
-            baslik: "7. Durak: İstanbul",
-            mesaj: "Sen oradasın, şehrin kalabalığında... Sana ve şehre kocaman bir selam.",
-            videoID: "aDju79MtUR8"
-        },
-        8: {
-            baslik: "8. Durak: İstanbul'da Sonbahar",
-            mesaj: "Şehrin ve aşkın en duygusal hali. Gözlerini kapat ve beni hisset.",
-            videoID: "JbOrMOTZUtM"
-        },
-        9: {
-            baslik: "9. Durak: Sarılırım Birine",
-            mesaj: "Kime sarılsam sensin... Her yerde, her şeyde sen varsın.",
-            videoID: "kPM5VXhpCfA"
-        },
-        10: {
-            baslik: "10. Durak: Bir Sevmek Bin Defa Ölmek Demekmiş",
-            mesaj: "Finalden bir önceki adım. Tutku, özlem ve aşkın en yoğun hali...",
-            videoID: "qHqJ0aL2vQw" 
-        },
-        11: {
-            baslik: "Final: Seni Seviyorum",
-            mesaj: "Bu yolculuk hiç bitmeyecek. Sadece bugünü böyle bitirmek istedim. İyi geceler her şeyim.",
-            videoID: "S_E2EHVxNAE" 
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Giden 10 Durak - Bir Aşk Yolculuğu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    };
 
-    // URL'den durak numarasını çekme
-    const urlParams = new URLSearchParams(window.location.search);
-    const durakNo = urlParams.get('durak');
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    if (duraklar[durakNo]) {
-        document.getElementById('baslik').innerText = duraklar[durakNo].baslik;
-        document.getElementById('mesaj').innerText = duraklar[durakNo].mesaj;
-        // Autoplay ekli ancak bazı tarayıcılar sesli otomatik başlatmayı engeller
-        document.getElementById('video').src = "https://www.youtube.com/embed/" + duraklar[durakNo].videoID + "?autoplay=1&rel=0";
-    } else {
-        document.getElementById('baslik').innerText = "Yolculuk Başlıyor";
-        document.getElementById('mesaj').innerText = "Hoş geldin... Lütfen sana gönderilen QR kodları sırasıyla okut.";
-        document.querySelector('.video-container').style.display = 'none';
-    }
-</script>
+        body::before {
+            content: '💕';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #667eea;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #764ba2;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .start-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+            animation: none;
+        }
+
+        .info {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .emoji-decoration {
+            font-size: 3rem;
+            margin: 20px 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .start-btn {
+                font-size: 1.1rem;
+                padding: 15px 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="emoji-decoration">🎵</div>
+
+        <h1>Sana Giden 10 Durak</h1>
+        <p class="subtitle">Bir Aşk Yolculuğu</p>
+
+        <p class="description">
+            Merhaba aşkım... 💕<br><br>
+            Sana özel hazırladığım bu yolculukta 10 durak var.
+            Her durakta seni düşünerek seçtiğim bir şarkı ve kalbimdeki sözler seni bekliyor.
+            <br><br>
+            Hazır mısın? Hadi başlayalım...
+        </p>
+
+        <a href="durak1.html" class="start-btn">
+            Yolculuğa Başla 🚀
+        </a>
+
+        <p class="info">
+            🎧 Kulaklıklarını tak, müziğin tadını çıkar<br>
+            ❤️ Her sayfa senin için özel tasarlandı
+        </p>
+    </div>
+</body>
+
+</html>

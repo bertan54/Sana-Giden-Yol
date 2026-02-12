@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durak 10: Bir Sevmek Bin Defa Ölmek Demekmiş - Sana Giden Yol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #8e44ad 50%, #c0392b 100%);
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '❤️‍🔥';
+            position: absolute;
+            font-size: 4rem;
+            animation: burn 2s ease-in-out infinite;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        @keyframes burn {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+                filter: brightness(1.5);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(142, 68, 173, 0.5);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: finalReveal 1.2s ease-out;
+        }
+
+        @keyframes finalReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotateY(-20deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        .durak-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c3e50, #8e44ad);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.4);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #8e44ad;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.3;
+        }
+
+        .message {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: #555;
+            padding: 20px;
+            background: rgba(142, 68, 173, 0.05);
+            border-left: 4px solid #8e44ad;
+            border-radius: 10px;
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.1), rgba(142, 68, 173, 0.1));
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            border: 2px solid #8e44ad;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(142, 68, 173, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #2c3e50, #8e44ad);
+            color: white;
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .nav-btn.next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.4);
+        }
+
+        .nav-btn.prev {
+            background: rgba(142, 68, 173, 0.1);
+            color: #8e44ad;
+            border: 2px solid #8e44ad;
+        }
+
+        .nav-btn.prev:hover {
+            background: rgba(142, 68, 173, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(142, 68, 173, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2c3e50, #8e44ad, #c0392b);
+            width: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            animation: complete 2s ease-in-out;
+        }
+
+        @keyframes complete {
+            0% {
+                width: 90%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <span class="durak-number">DURAK 10 / 10 - SON DURAK</span>
+        <h1>❤️‍🔥 Bir Sevmek Bin Defa Ölmek Demekmiş</h1>
+
+        <div class="final-message">
+            🎯 Yolculuğumuzun son durağına geldik...
+        </div>
+
+        <p class="message">
+            Bir sevmek bin defa ölmek demekmiş... Ama seninle bin defa ölmeye de razıyım.
+            Çünkü her ölüşte yeniden doğuyorum, seninle. Her anımız bir yeniden başlangıç.
+            Bu yolculuk burada bitiyor ama bizim hikayemiz daha yeni başlıyor.
+            Seni seviyorum, bugün de, yarın da, her zaman... 💕
+        </p>
+
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/Ql8W_4wS9xc" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="navigation">
+            <a href="durak9.html" class="nav-btn prev">← Önceki</a>
+            <button class="nav-btn next" disabled>Yolculuk Bitti ✨</button>
+        </div>
+    </div>
+</body>
+
+</html>

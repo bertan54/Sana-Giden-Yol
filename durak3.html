@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durak 3: Belki Üstümüzden Bir Kuş Geçer - Sana Giden Yol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #56CCF2 0%, #2F80ED 50%, #1CB5E0 100%);
+            color: #0f3460;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '🕊️';
+            position: absolute;
+            font-size: 3rem;
+            top: 10%;
+            left: 10%;
+            animation: fly 15s linear infinite;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(80vw, 30vh);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(47, 128, 237, 0.4);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .durak-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #56CCF2, #2F80ED);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(47, 128, 237, 0.4);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #2F80ED;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: #555;
+            padding: 20px;
+            background: rgba(47, 128, 237, 0.05);
+            border-left: 4px solid #2F80ED;
+            border-radius: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(47, 128, 237, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #56CCF2, #2F80ED);
+            color: white;
+            box-shadow: 0 5px 15px rgba(47, 128, 237, 0.3);
+        }
+
+        .nav-btn.next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(47, 128, 237, 0.4);
+        }
+
+        .nav-btn.prev {
+            background: rgba(47, 128, 237, 0.1);
+            color: #2F80ED;
+            border: 2px solid #2F80ED;
+        }
+
+        .nav-btn.prev:hover {
+            background: rgba(47, 128, 237, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(47, 128, 237, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #56CCF2, #2F80ED);
+            width: 30%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <span class="durak-number">DURAK 3 / 10</span>
+        <h1>🕊️ Belki Üstümüzden Bir Kuş Geçer</h1>
+
+        <p class="message">
+            Belki üstümüzden bir kuş geçer ve bize umut taşır...
+            Hayat bazen beklenmedik anlarla dolu. Ama seninle her an, her anı yaşamaya değer.
+            Geleceğimiz belirsiz olabilir ama kalbim senden emin.
+        </p>
+
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/72nGwgu3JDg" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="navigation">
+            <a href="durak2.html" class="nav-btn prev">← Önceki</a>
+            <a href="durak4.html" class="nav-btn next">Sonraki →</a>
+        </div>
+    </div>
+</body>
+
+</html>

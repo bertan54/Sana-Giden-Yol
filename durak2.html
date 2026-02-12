@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durak 2: Keşke - Sana Giden Yol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: twinkle 3s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 20%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .durak-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-section {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .couple-photo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            font-size: 0.95rem;
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .message {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: #555;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-left: 4px solid #667eea;
+            border-radius: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-btn.next:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn.prev {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .nav-btn.prev:not(:disabled):hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .sidebar h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .song-list {
+            list-style: none;
+        }
+
+        .song-list li {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .song-list li.current {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+        }
+
+        .song-list li.played {
+            background: rgba(102, 126, 234, 0.1);
+            color: #666;
+        }
+
+        .song-list li.locked {
+            background: #f5f5f5;
+            color: #ccc;
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+
+            <span class="durak-number">DURAK 2 / 10</span>
+            <h1>💜 Keşke</h1>
+
+            <div class="photo-section">
+                <img src="photos/photo2.svg" alt="Bizim Fotoğrafımız" class="couple-photo">
+                <p class="photo-caption">💕 Birlikte</p>
+            </div>
+
+            <p class="message">
+                Keşke şu an yanında olabilseydim... Ama bil ki kalbim her an seninle.
+                Keşke zamanı durdurup bu anı sonsuza kadar yaşayabilseydik.
+                Özlem, en güzel ama en acı veren duygu. Seni özlüyorum.
+            </p>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/WoML_U31Xek?rel=0&modestbranding=1" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="navigation">
+                <a href="durak1.html" class="nav-btn prev">← Önceki</a>
+                <a href="durak3.html" class="nav-btn next" id="nextBtn">Sonraki →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h3>🎵 Şarkı Listesi</h3>
+        <ul class="song-list">
+            <li class="played">✓ Bilir O Beni</li>
+            <li class="current">▶ Keşke</li>
+            <li class="locked" id="song3">🔒 Belki Üstümüzden...</li>
+            <li class="locked">🔒 Dillere Düşeceğiz</li>
+            <li class="locked">🔒 Ara Beni Lütfen</li>
+            <li class="locked">🔒 Senden Daha Güzel</li>
+            <li class="locked">🔒 İstanbul</li>
+            <li class="locked">🔒 İstanbul'da Sonbahar</li>
+            <li class="locked">🔒 Sarılırım Birine</li>
+            <li class="locked">🔒 Bir Sevmek...</li>
+        </ul>
+    </div>
+
+    <script>
+        const unlockHours = {
+            1: 9, 2: 10, 3: 11, 4: 12, 5: 13,
+            6: 14, 7: 15, 8: 16, 9: 17, 10: 18
+        };
+
+        const currentDurak = 2;
+        const nextDurak = 3;
+        const nextBtn = document.getElementById('nextBtn');
+        const song3 = document.getElementById('song3');
+
+        function checkUnlock() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+
+            if (currentHour >= unlockHours[nextDurak]) {
+                nextBtn.style.pointerEvents = 'auto';
+                nextBtn.style.opacity = '1';
+                song3.className = 'locked';
+                song3.innerHTML = '🔒 Belki Üstümüzden... (11:00\'da açılacak)';
+            } else {
+                nextBtn.style.pointerEvents = 'none';
+                nextBtn.style.opacity = '0.5';
+
+                const hoursLeft = unlockHours[nextDurak] - currentHour - 1;
+                const minutesLeft = 60 - currentMinute;
+
+                if (hoursLeft === 0) {
+                    nextBtn.innerHTML = `🔒 ${minutesLeft} dakika sonra açılacak`;
+                } else {
+                    nextBtn.innerHTML = `🔒 ${unlockHours[nextDurak]}:00'da açılacak`;
+                }
+
+                song3.innerHTML = `🔒 Belki Üstümüzden... (${unlockHours[nextDurak]}:00'da)`;
+            }
+        }
+
+        checkUnlock();
+        setInterval(checkUnlock, 60000);
+    </script>
+</body>
+
+</html>

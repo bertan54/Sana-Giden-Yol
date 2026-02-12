@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durak 1: Bilir O Beni - Sana Giden Yol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FDC830 100%);
+            color: #2c1810;
+            min-height: 100vh;
+            display: flex;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-50px, -50px);
+            }
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 107, 53, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF6B35, #FDC830);
+            width: 10%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .durak-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B35, #FDC830);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #FF6B35;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-section {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .couple-photo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            font-size: 0.95rem;
+            color: #FF6B35;
+            font-style: italic;
+        }
+
+        .message {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: #555;
+            padding: 20px;
+            background: rgba(255, 107, 53, 0.05);
+            border-left: 4px solid #FF6B35;
+            border-radius: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #FF6B35, #FDC830);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .nav-btn.next:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .nav-btn.prev {
+            background: rgba(255, 107, 53, 0.1);
+            color: #FF6B35;
+            border: 2px solid #FF6B35;
+        }
+
+        .nav-btn.prev:not(:disabled):hover {
+            background: rgba(255, 107, 53, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .sidebar h3 {
+            color: #FF6B35;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .song-list {
+            list-style: none;
+        }
+
+        .song-list li {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .song-list li.current {
+            background: linear-gradient(135deg, #FF6B35, #FDC830);
+            color: white;
+            font-weight: bold;
+        }
+
+        .song-list li.played {
+            background: rgba(255, 107, 53, 0.1);
+            color: #666;
+        }
+
+        .song-list li.locked {
+            background: #f5f5f5;
+            color: #ccc;
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+
+            <span class="durak-number">DURAK 1 / 10</span>
+            <h1>🌅 Bilir O Beni</h1>
+
+            <div class="photo-section">
+                <img src="photos/photo1.svg" alt="Bizim Fotoğrafımız" class="couple-photo">
+                <p class="photo-caption">💕 Birlikte</p>
+            </div>
+
+            <p class="message">
+                Günaydın aşkım... Yolculuğumuz başlıyor. Bu şarkı, sabahına güneş gibi doğsun diye.
+                Çünkü sen beni bilirsin, her halimle, her anımla. Ve ben de seni, kalbimin her köşesinde taşıyorum.
+            </p>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/b-gXaRGJ5Sw?rel=0&modestbranding=1" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn prev" disabled>← Önceki</button>
+                <a href="durak2.html" class="nav-btn next" id="nextBtn">Sonraki →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>🎵 Şarkı Listesi</h3>
+        <ul class="song-list">
+            <li class="current">▶ Bilir O Beni</li>
+            <li class="locked" id="song2">🔒 Keşke</li>
+            <li class="locked">🔒 Belki Üstümüzden...</li>
+            <li class="locked">🔒 Dillere Düşeceğiz</li>
+            <li class="locked">🔒 Ara Beni Lütfen</li>
+            <li class="locked">🔒 Senden Daha Güzel</li>
+            <li class="locked">🔒 İstanbul</li>
+            <li class="locked">🔒 İstanbul'da Sonbahar</li>
+            <li class="locked">🔒 Sarılırım Birine</li>
+            <li class="locked">🔒 Bir Sevmek...</li>
+        </ul>
+    </div>
+
+    <script>
+        // Zaman bazlı kilitleme sistemi
+        const unlockHours = {
+            1: 9,   // 09:00
+            2: 10,  // 10:00
+            3: 11,  // 11:00
+            4: 12,  // 12:00
+            5: 13,  // 13:00
+            6: 14,  // 14:00
+            7: 15,  // 15:00
+            8: 16,  // 16:00
+            9: 17,  // 17:00
+            10: 18  // 18:00
+        };
+
+        const currentDurak = 1;
+        const nextDurak = 2;
+        const nextBtn = document.getElementById('nextBtn');
+        const song2 = document.getElementById('song2');
+
+        function checkUnlock() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+
+            if (currentHour >= unlockHours[nextDurak]) {
+                // Sonraki durak açıldı
+                nextBtn.style.pointerEvents = 'auto';
+                nextBtn.style.opacity = '1';
+                song2.className = 'locked';
+                song2.innerHTML = '🔒 Keşke (10:00\'da açılacak)';
+            } else {
+                // Henüz kilitli
+                nextBtn.style.pointerEvents = 'none';
+                nextBtn.style.opacity = '0.5';
+
+                const hoursLeft = unlockHours[nextDurak] - currentHour - 1;
+                const minutesLeft = 60 - currentMinute;
+
+                if (hoursLeft === 0) {
+                    nextBtn.innerHTML = `🔒 ${minutesLeft} dakika sonra açılacak`;
+                } else {
+                    nextBtn.innerHTML = `🔒 ${unlockHours[nextDurak]}:00'da açılacak`;
+                }
+
+                song2.innerHTML = `🔒 Keşke (${unlockHours[nextDurak]}:00'da)`;
+            }
+        }
+
+        // İlk kontrol
+        checkUnlock();
+
+        // Her dakika kontrol et
+        setInterval(checkUnlock, 60000);
+    </script>
+</body>
+
+</html>
