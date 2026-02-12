@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Durak 10: Bir Sevmek Bin Defa Ölmek Demekmiş - Sana Giden Yol</title>
+    <title>Durak 10: Bir Sevmek Bin Defa Ölmek Demekmiş - Bize Giden Yol</title>
     <style>
         * {
             margin: 0;
@@ -14,23 +14,21 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #2c3e50 0%, #8e44ad 50%, #c0392b 100%);
-            color: #1a1a1a;
+            background: linear-gradient(135deg, #360033 0%, #0B8793 50%, #000000 100%);
+            color: #fff;
             min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
         }
 
         body::before {
-            content: '❤️‍🔥';
+            content: '🔥';
             position: absolute;
-            font-size: 4rem;
-            animation: burn 2s ease-in-out infinite;
-            opacity: 0.3;
+            font-size: 6rem;
+            animation: burn 3s ease-in-out infinite;
+            opacity: 0.2;
             z-index: 0;
         }
 
@@ -38,58 +36,97 @@
 
             0%,
             100% {
-                transform: scale(1);
-                filter: brightness(1);
+                transform: scale(1) translateY(0);
+                opacity: 0.2;
             }
 
             50% {
-                transform: scale(1.2);
-                filter: brightness(1.5);
+                transform: scale(1.2) translateY(-20px);
+                opacity: 0.4;
             }
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
             border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(142, 68, 173, 0.5);
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            animation: finalReveal 1.2s ease-out;
+            box-shadow: 0 20px 60px rgba(54, 0, 51, 0.6);
+            animation: fadeIn 1.2s ease-out;
         }
 
-        @keyframes finalReveal {
-            0% {
+        @keyframes fadeIn {
+            from {
                 opacity: 0;
-                transform: scale(0.8) rotateY(-20deg);
+                transform: scale(0.9);
             }
 
-            100% {
+            to {
                 opacity: 1;
-                transform: scale(1) rotateY(0deg);
+                transform: scale(1);
             }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(54, 0, 51, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #360033, #0B8793);
+            width: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
         }
 
         .durak-number {
             display: inline-block;
-            background: linear-gradient(135deg, #2c3e50, #8e44ad);
+            background: linear-gradient(135deg, #360033, #0B8793);
             color: white;
             padding: 8px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: bold;
             margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.4);
+            box-shadow: 0 4px 15px rgba(54, 0, 51, 0.6);
         }
 
         h1 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #8e44ad;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #360033;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            line-height: 1.3;
+        }
+
+        .photo-section {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .couple-photo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            font-size: 0.95rem;
+            color: #360033;
+            font-style: italic;
         }
 
         .message {
@@ -99,20 +136,9 @@
             font-style: italic;
             color: #555;
             padding: 20px;
-            background: rgba(142, 68, 173, 0.05);
-            border-left: 4px solid #8e44ad;
+            background: rgba(54, 0, 51, 0.05);
+            border-left: 4px solid #360033;
             border-radius: 10px;
-        }
-
-        .final-message {
-            background: linear-gradient(135deg, rgba(44, 62, 80, 0.1), rgba(142, 68, 173, 0.1));
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: bold;
-            color: #2c3e50;
-            border: 2px solid #8e44ad;
         }
 
         .video-container {
@@ -122,7 +148,7 @@
             overflow: hidden;
             border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(142, 68, 173, 0.4);
+            box-shadow: 0 10px 30px rgba(54, 0, 51, 0.4);
             transition: transform 0.3s ease;
         }
 
@@ -163,24 +189,24 @@
         }
 
         .nav-btn.next {
-            background: linear-gradient(135deg, #2c3e50, #8e44ad);
+            background: linear-gradient(135deg, #360033, #0B8793);
             color: white;
-            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+            box-shadow: 0 5px 15px rgba(54, 0, 51, 0.4);
         }
 
-        .nav-btn.next:hover {
+        .nav-btn.next:not(:disabled):hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.4);
+            box-shadow: 0 8px 20px rgba(54, 0, 51, 0.5);
         }
 
         .nav-btn.prev {
-            background: rgba(142, 68, 173, 0.1);
-            color: #8e44ad;
-            border: 2px solid #8e44ad;
+            background: rgba(54, 0, 51, 0.1);
+            color: #360033;
+            border: 2px solid #360033;
         }
 
-        .nav-btn.prev:hover {
-            background: rgba(142, 68, 173, 0.2);
+        .nav-btn.prev:not(:disabled):hover {
+            background: rgba(54, 0, 51, 0.2);
             transform: translateY(-2px);
         }
 
@@ -189,31 +215,51 @@
             cursor: not-allowed;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(142, 68, 173, 0.2);
-            border-radius: 10px;
-            margin-bottom: 25px;
-            overflow: hidden;
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 10;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #2c3e50, #8e44ad, #c0392b);
-            width: 100%;
-            border-radius: 10px;
-            transition: width 0.5s ease;
-            animation: complete 2s ease-in-out;
+        .sidebar h3 {
+            color: #360033;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
-        @keyframes complete {
-            0% {
-                width: 90%;
-            }
+        .song-list {
+            list-style: none;
+        }
 
-            100% {
-                width: 100%;
+        .song-list li {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .song-list li.current {
+            background: linear-gradient(135deg, #360033, #0B8793);
+            color: white;
+            font-weight: bold;
+        }
+
+        .song-list li.played {
+            background: rgba(54, 0, 51, 0.1);
+            color: #666;
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
             }
         }
 
@@ -223,7 +269,7 @@
             }
 
             h1 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
 
             .message {
@@ -234,36 +280,48 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
+    <div class="main-content">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <span class="durak-number">DURAK 10 / 10 - FİNAL</span>
+            <h1>🔥 Bir Sevmek Bin Defa Ölmek Demekmiş</h1>
+            <div class="photo-section">
+                <img src="photos/photo10.jpg" alt="Bizim Fotoğrafımız" class="couple-photo">
+                <p class="photo-caption">💕 Birlikte</p>
+            </div>
+            <p class="message">
+                Bir sevmek bin defa ölmek demekmiş... Ama seninle bin defa ölmeye de razıyım.
+                Çünkü her ölüşte yeniden doğuyorum, seninle. Her anımız bir yeniden başlangıç.
+                Bu yolculuk burada bitiyor ama bizim hikayemiz daha yeni başlıyor.
+                Seni seviyorum, bugün de, yarın da, her zaman... 💕
+            </p>
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/Qy8qjI4BLxk?rel=0&modestbranding=1" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="navigation">
+                <a href="durak9.html" class="nav-btn prev">← Önceki</a>
+                <a href="index.html" class="nav-btn next">🏠 Başa Dön</a>
+            </div>
         </div>
-
-        <span class="durak-number">DURAK 10 / 10 - SON DURAK</span>
-        <h1>❤️‍🔥 Bir Sevmek Bin Defa Ölmek Demekmiş</h1>
-
-        <div class="final-message">
-            🎯 Yolculuğumuzun son durağına geldik...
-        </div>
-
-        <p class="message">
-            Bir sevmek bin defa ölmek demekmiş... Ama seninle bin defa ölmeye de razıyım.
-            Çünkü her ölüşte yeniden doğuyorum, seninle. 
-            Bu yolculuk burada bitiyor ama bizim hikayemiz daha yeni başlıyor.
-            Seni seviyorum, bugün de, yarın da, her zaman...... 💕
-        </p>
-
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/Ql8W_4wS9xc" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        </div>
-
-        <div class="navigation">
-            <a href="durak9.html" class="nav-btn prev">← Önceki</a>
-            <button class="nav-btn next" disabled>Yolculuk Bitti ✨</button>
-        </div>
+    </div>
+    <div class="sidebar">
+        <h3>🎵 Şarkı Listesi</h3>
+        <ul class="song-list">
+            <li class="played">✓ Bilir O Beni</li>
+            <li class="played">✓ Keşke</li>
+            <li class="played">✓ Belki Üstümüzden...</li>
+            <li class="played">✓ Dillere Düşeceğiz</li>
+            <li class="played">✓ Ara Beni Lütfen</li>
+            <li class="played">✓ Senden Daha Güzel</li>
+            <li class="played">✓ İstanbul</li>
+            <li class="played">✓ İstanbul'da Sonbahar</li>
+            <li class="played">✓ Sarılırım Birine</li>
+            <li class="current">▶ Bir Sevmek...</li>
+        </ul>
     </div>
 </body>
 

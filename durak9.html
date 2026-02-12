@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Durak 9: Sarılırım Birine - Sana Giden Yol</title>
+    <title>Durak 9: Sarılırım Birine - Bize Giden Yol</title>
     <style>
         * {
             margin: 0;
@@ -14,12 +14,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 50%, #ffb347 100%);
-            color: #5c0a28;
+            background: linear-gradient(135deg, #FF512F 0%, #DD2476 50%, #F09819 100%);
+            color: #2c1810;
             min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
@@ -29,8 +27,8 @@
             content: '🤗';
             position: absolute;
             font-size: 5rem;
-            animation: hug 3s ease-in-out infinite;
-            opacity: 0.3;
+            animation: hug 2s ease-in-out infinite;
+            opacity: 0.2;
             z-index: 0;
         }
 
@@ -38,59 +36,95 @@
 
             0%,
             100% {
-                transform: scale(1) rotate(-5deg);
+                transform: scale(1);
             }
 
             50% {
-                transform: scale(1.1) rotate(5deg);
+                transform: scale(1.1);
             }
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
             border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(238, 9, 121, 0.4);
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            animation: embrace 1s ease-out;
+            box-shadow: 0 20px 60px rgba(255, 81, 47, 0.4);
+            animation: fadeIn 1s ease-out;
         }
 
-        @keyframes embrace {
-            0% {
-                transform: scale(0.5) rotate(-10deg);
+        @keyframes fadeIn {
+            from {
                 opacity: 0;
+                transform: scale(0.95);
             }
 
-            60% {
-                transform: scale(1.05) rotate(2deg);
-            }
-
-            100% {
-                transform: scale(1) rotate(0deg);
+            to {
                 opacity: 1;
+                transform: scale(1);
             }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 81, 47, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF512F, #DD2476);
+            width: 90%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
         }
 
         .durak-number {
             display: inline-block;
-            background: linear-gradient(135deg, #ee0979, #ff6a00);
+            background: linear-gradient(135deg, #FF512F, #DD2476);
             color: white;
             padding: 8px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: bold;
             margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(238, 9, 121, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 81, 47, 0.4);
         }
 
         h1 {
             font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: #ee0979;
+            margin-bottom: 20px;
+            color: #FF512F;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-section {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .couple-photo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            font-size: 0.95rem;
+            color: #FF512F;
+            font-style: italic;
         }
 
         .message {
@@ -100,8 +134,8 @@
             font-style: italic;
             color: #555;
             padding: 20px;
-            background: rgba(238, 9, 121, 0.05);
-            border-left: 4px solid #ee0979;
+            background: rgba(255, 81, 47, 0.05);
+            border-left: 4px solid #FF512F;
             border-radius: 10px;
         }
 
@@ -112,7 +146,7 @@
             overflow: hidden;
             border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(238, 9, 121, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 81, 47, 0.3);
             transition: transform 0.3s ease;
         }
 
@@ -153,42 +187,78 @@
         }
 
         .nav-btn.next {
-            background: linear-gradient(135deg, #ee0979, #ff6a00);
+            background: linear-gradient(135deg, #FF512F, #DD2476);
             color: white;
-            box-shadow: 0 5px 15px rgba(238, 9, 121, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 81, 47, 0.3);
         }
 
-        .nav-btn.next:hover {
+        .nav-btn.next:not(:disabled):hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(238, 9, 121, 0.4);
+            box-shadow: 0 8px 20px rgba(255, 81, 47, 0.4);
         }
 
         .nav-btn.prev {
-            background: rgba(238, 9, 121, 0.1);
-            color: #ee0979;
-            border: 2px solid #ee0979;
+            background: rgba(255, 81, 47, 0.1);
+            color: #FF512F;
+            border: 2px solid #FF512F;
         }
 
-        .nav-btn.prev:hover {
-            background: rgba(238, 9, 121, 0.2);
+        .nav-btn.prev:not(:disabled):hover {
+            background: rgba(255, 81, 47, 0.2);
             transform: translateY(-2px);
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(238, 9, 121, 0.2);
-            border-radius: 10px;
-            margin-bottom: 25px;
-            overflow: hidden;
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ee0979, #ff6a00);
-            width: 90%;
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .sidebar h3 {
+            color: #FF512F;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .song-list {
+            list-style: none;
+        }
+
+        .song-list li {
+            padding: 10px;
+            margin-bottom: 8px;
             border-radius: 10px;
-            transition: width 0.5s ease;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .song-list li.current {
+            background: linear-gradient(135deg, #FF512F, #DD2476);
+            color: white;
+            font-weight: bold;
+        }
+
+        .song-list li.played {
+            background: rgba(255, 81, 47, 0.1);
+            color: #666;
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
+            }
         }
 
         @media (max-width: 600px) {
@@ -208,32 +278,74 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-
-        <span class="durak-number">DURAK 9 / 10</span>
-        <h1>🤗 Sarılırım Birine</h1>
-
-        <p class="message">
-            Kolların benim en güvenli limanım.
-            Sıkı sıkı sarılmak istiyorum sana, hiç bırakmadan. Şişhane çıkışındaki gibi
-            Kalbinin atışını duymak, nefesini hissetmek, tenis maçı yapmak. İşte benim mutluluğum bu.
-        </p>
-
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/GnjRrfFRMf0" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        </div>
-
-        <div class="navigation">
-            <a href="durak8.html" class="nav-btn prev">← Önceki</a>
-            <a href="durak10.html" class="nav-btn next">Sonraki →</a>
+    <div class="main-content">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <span class="durak-number">DURAK 9 / 10</span>
+            <h1>🤗 Sarılırım Birine</h1>
+            <div class="photo-section">
+                <img src="photos/photo9.jpg" alt="Bizim Fotoğrafımız" class="couple-photo">
+                <p class="photo-caption">💕 Birlikte</p>
+            </div>
+            <p class="message">
+                Sarılırım birine ama o sen olmalısın... Kolların benim en güvenli limanım.
+                Sıkı sıkı sarılmak istiyorum sana, hiç bırakmadan.
+                Kalbinin atışını duymak, nefesini hissetmek... İşte benim mutluluğum bu.
+            </p>
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/Kppq8KCLjTU?rel=0&modestbranding=1" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="navigation">
+                <a href="durak8.html" class="nav-btn prev">← Önceki</a>
+                <a href="durak10.html" class="nav-btn next" id="nextBtn">Sonraki →</a>
+            </div>
         </div>
     </div>
+    <div class="sidebar">
+        <h3>🎵 Şarkı Listesi</h3>
+        <ul class="song-list">
+            <li class="played">✓ Bilir O Beni</li>
+            <li class="played">✓ Keşke</li>
+            <li class="played">✓ Belki Üstümüzden...</li>
+            <li class="played">✓ Dillere Düşeceğiz</li>
+            <li class="played">✓ Ara Beni Lütfen</li>
+            <li class="played">✓ Senden Daha Güzel</li>
+            <li class="played">✓ İstanbul</li>
+            <li class="played">✓ İstanbul'da Sonbahar</li>
+            <li class="current">▶ Sarılırım Birine</li>
+        </ul>
+    </div>
+    <script>
+        const unlockHours = { 1: 9, 2: 10, 3: 11, 4: 12, 5: 13, 6: 14, 7: 15, 8: 16, 9: 17, 10: 18 };
+        const currentDurak = 9, nextDurak = 10;
+        const nextBtn = document.getElementById('nextBtn');
+        function checkUnlock() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            if (currentHour >= unlockHours[nextDurak]) {
+                nextBtn.style.pointerEvents = 'auto';
+                nextBtn.style.opacity = '1';
+                nextBtn.innerHTML = 'Sonraki →';
+            } else {
+                nextBtn.style.pointerEvents = 'none';
+                nextBtn.style.opacity = '0.5';
+                const hoursLeft = unlockHours[nextDurak] - currentHour - 1;
+                const minutesLeft = 60 - currentMinute;
+                if (hoursLeft === 0) {
+                    nextBtn.innerHTML = `🔒 ${minutesLeft} dakika sonra`;
+                } else {
+                    nextBtn.innerHTML = `🔒 ${unlockHours[nextDurak]}:00'da açılacak`;
+                }
+            }
+        }
+        checkUnlock();
+        setInterval(checkUnlock, 60000);
+    </script>
 </body>
 
 </html>

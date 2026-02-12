@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Durak 7: İstanbul - Sana Giden Yol</title>
+    <title>Durak 7: İstanbul - Bize Giden Yol</title>
     <style>
         * {
             margin: 0;
@@ -14,12 +14,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #134E5E 0%, #71B280 50%, #A8E6CF 100%);
-            color: #0a3d3d;
+            background: linear-gradient(135deg, #00B4DB 0%, #0083B0 50%, #005F73 100%);
+            color: #001219;
             min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
@@ -28,64 +26,105 @@
         body::before {
             content: '🌉';
             position: absolute;
-            font-size: 4rem;
-            bottom: 10%;
-            right: 10%;
-            opacity: 0.2;
+            font-size: 5rem;
+            opacity: 0.15;
             z-index: 0;
+            animation: sway 3s ease-in-out infinite;
         }
 
-        body::after {
-            content: '🕌';
-            position: absolute;
-            font-size: 3rem;
-            top: 15%;
-            left: 15%;
-            opacity: 0.2;
-            z-index: 0;
+        @keyframes sway {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
             border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(19, 78, 94, 0.4);
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 0.8s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 180, 219, 0.4);
+            animation: fadeIn 1s ease-out;
         }
 
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: scale(0.95);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
             }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 180, 219, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00B4DB, #0083B0);
+            width: 70%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
         }
 
         .durak-number {
             display: inline-block;
-            background: linear-gradient(135deg, #134E5E, #71B280);
+            background: linear-gradient(135deg, #00B4DB, #0083B0);
             color: white;
             padding: 8px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: bold;
             margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(19, 78, 94, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 180, 219, 0.4);
         }
 
         h1 {
             font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: #134E5E;
+            margin-bottom: 20px;
+            color: #00B4DB;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-section {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .couple-photo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            font-size: 0.95rem;
+            color: #00B4DB;
+            font-style: italic;
         }
 
         .message {
@@ -95,8 +134,8 @@
             font-style: italic;
             color: #555;
             padding: 20px;
-            background: rgba(19, 78, 94, 0.05);
-            border-left: 4px solid #134E5E;
+            background: rgba(0, 180, 219, 0.05);
+            border-left: 4px solid #00B4DB;
             border-radius: 10px;
         }
 
@@ -107,7 +146,7 @@
             overflow: hidden;
             border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(19, 78, 94, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 180, 219, 0.3);
             transition: transform 0.3s ease;
         }
 
@@ -148,42 +187,78 @@
         }
 
         .nav-btn.next {
-            background: linear-gradient(135deg, #134E5E, #71B280);
+            background: linear-gradient(135deg, #00B4DB, #0083B0);
             color: white;
-            box-shadow: 0 5px 15px rgba(19, 78, 94, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 180, 219, 0.3);
         }
 
-        .nav-btn.next:hover {
+        .nav-btn.next:not(:disabled):hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(19, 78, 94, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 180, 219, 0.4);
         }
 
         .nav-btn.prev {
-            background: rgba(19, 78, 94, 0.1);
-            color: #134E5E;
-            border: 2px solid #134E5E;
+            background: rgba(0, 180, 219, 0.1);
+            color: #00B4DB;
+            border: 2px solid #00B4DB;
         }
 
-        .nav-btn.prev:hover {
-            background: rgba(19, 78, 94, 0.2);
+        .nav-btn.prev:not(:disabled):hover {
+            background: rgba(0, 180, 219, 0.2);
             transform: translateY(-2px);
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(19, 78, 94, 0.2);
-            border-radius: 10px;
-            margin-bottom: 25px;
-            overflow: hidden;
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #134E5E, #71B280);
-            width: 70%;
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .sidebar h3 {
+            color: #00B4DB;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .song-list {
+            list-style: none;
+        }
+
+        .song-list li {
+            padding: 10px;
+            margin-bottom: 8px;
             border-radius: 10px;
-            transition: width 0.5s ease;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .song-list li.current {
+            background: linear-gradient(135deg, #00B4DB, #0083B0);
+            color: white;
+            font-weight: bold;
+        }
+
+        .song-list li.played {
+            background: rgba(0, 180, 219, 0.1);
+            color: #666;
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
+            }
         }
 
         @media (max-width: 600px) {
@@ -203,32 +278,72 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-
-        <span class="durak-number">DURAK 7 / 10</span>
-        <h1>🌉 İstanbul</h1>
-
-        <p class="message">
-            İstanbul gibi büyülü bir şehir. Ama seninle her yer İstanbul kadar güzel olur.
-            Boğaz'ın maviliği, köprülerin ışıkları, sokaklarımızın hikayesi...
-            Hepsi seninle daha anlamlı. Sen benim İstanbulumsun.
-        </p>
-
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/KHQjUTSbn8Y" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        </div>
-
-        <div class="navigation">
-            <a href="durak6.html" class="nav-btn prev">← Önceki</a>
-            <a href="durak8.html" class="nav-btn next">Sonraki →</a>
+    <div class="main-content">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <span class="durak-number">DURAK 7 / 10</span>
+            <h1>🌉 İstanbul</h1>
+            <div class="photo-section">
+                <img src="photos/photo7.jpg" alt="Bizim Fotoğrafımız" class="couple-photo">
+                <p class="photo-caption">💕 Birlikte</p>
+            </div>
+            <p class="message">
+                İstanbul gibi büyülü bir şehir... Ama seninle her yer İstanbul kadar güzel olur.
+                Boğaz'ın maviliği, köprülerin ışıkları, sokakların hikayesi...
+                Hepsi seninle daha anlamlı. Bir gün seninle İstanbul'u gezeceğiz, el ele.
+            </p>
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/pJWHYJMvTMo?rel=0&modestbranding=1" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="navigation">
+                <a href="durak6.html" class="nav-btn prev">← Önceki</a>
+                <a href="durak8.html" class="nav-btn next" id="nextBtn">Sonraki →</a>
+            </div>
         </div>
     </div>
+    <div class="sidebar">
+        <h3>🎵 Şarkı Listesi</h3>
+        <ul class="song-list">
+            <li class="played">✓ Bilir O Beni</li>
+            <li class="played">✓ Keşke</li>
+            <li class="played">✓ Belki Üstümüzden...</li>
+            <li class="played">✓ Dillere Düşeceğiz</li>
+            <li class="played">✓ Ara Beni Lütfen</li>
+            <li class="played">✓ Senden Daha Güzel</li>
+            <li class="current">▶ İstanbul</li>
+        </ul>
+    </div>
+    <script>
+        const unlockHours = { 1: 9, 2: 10, 3: 11, 4: 12, 5: 13, 6: 14, 7: 15, 8: 16, 9: 17, 10: 18 };
+        const currentDurak = 7, nextDurak = 8;
+        const nextBtn = document.getElementById('nextBtn');
+        function checkUnlock() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            if (currentHour >= unlockHours[nextDurak]) {
+                nextBtn.style.pointerEvents = 'auto';
+                nextBtn.style.opacity = '1';
+                nextBtn.innerHTML = 'Sonraki →';
+            } else {
+                nextBtn.style.pointerEvents = 'none';
+                nextBtn.style.opacity = '0.5';
+                const hoursLeft = unlockHours[nextDurak] - currentHour - 1;
+                const minutesLeft = 60 - currentMinute;
+                if (hoursLeft === 0) {
+                    nextBtn.innerHTML = `🔒 ${minutesLeft} dakika sonra`;
+                } else {
+                    nextBtn.innerHTML = `🔒 ${unlockHours[nextDurak]}:00'da açılacak`;
+                }
+            }
+        }
+        checkUnlock();
+        setInterval(checkUnlock, 60000);
+    </script>
 </body>
 
 </html>
