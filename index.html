@@ -1,77 +1,4 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sana Giden 11 Durak</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 600px;
-            width: 90%;
-            border: 1px solid #eee;
-        }
-        h1 { 
-            font-size: 1.8rem; 
-            margin-bottom: 15px; 
-            color: #c2185b; /* Koyu pembe başlık */
-        }
-        p { 
-            font-size: 1.1rem; 
-            line-height: 1.6; 
-            margin-bottom: 25px; 
-            font-style: italic;
-            color: #555;
-        }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 oranı */
-            height: 0;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-        }
-        .kalp {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <span class="kalp">❤️</span>
-    <h1 id="baslik">Yükleniyor...</h1>
-    <p id="mesaj">Lütfen bekleyin...</p>
-    
-    <div class="video-container">
-        <iframe id="video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-</div>
-
 <script>
-    // SENİN LİSTENE GÖRE HAZIRLANMIŞ VERİ TABANI
     const duraklar = {
         1: {
             baslik: "1. Durak: Bilir O Beni",
@@ -101,7 +28,7 @@
         6: {
             baslik: "6. Durak: Senden Daha Güzel",
             mesaj: "Lütfen şu an kamerayı aç ve aynaya bak. Çünkü bu dünyada, senden daha güzelini bulamadım.",
-            videoID: "ItISVW3o0X0"
+            videoID: "ItISVW3o0X0"  /* <-- Duman Şarkısı (Düzeltildi) */
         },
         7: {
             baslik: "7. Durak: İstanbul",
@@ -121,31 +48,27 @@
         10: {
             baslik: "10. Durak: Bir Sevmek Bin Defa Ölmek Demekmiş",
             mesaj: "Finalden bir önceki adım. Tutku, özlem ve aşkın en yoğun hali...",
-            videoID: "qHqJ0aL2vQw" // Barış Akarsu linkini senin için bulup ekledim
+            videoID: "qHqJ0aL2vQw" 
         },
         11: {
             baslik: "Final: Seni Seviyorum",
             mesaj: "Bu yolculuk hiç bitmeyecek. Sadece bugünü böyle bitirmek istedim. İyi geceler her şeyim.",
-            videoID: "S_E2EHVxNAE" // Buraya örnek romantik bir fon müziği koydum, istersen kendi videonu çekip yükleyebiliriz!
+            videoID: "S_E2EHVxNAE" 
         }
     };
 
-    // URL Kontrol ve İçerik Yükleme
+    // URL'den durak numarasını çekme
     const urlParams = new URLSearchParams(window.location.search);
     const durakNo = urlParams.get('durak');
 
     if (duraklar[durakNo]) {
         document.getElementById('baslik').innerText = duraklar[durakNo].baslik;
         document.getElementById('mesaj').innerText = duraklar[durakNo].mesaj;
-        // Mobilde otomatik oynatma bazen engellenir ama deniyoruz
+        // Autoplay ekli ancak bazı tarayıcılar sesli otomatik başlatmayı engeller
         document.getElementById('video').src = "https://www.youtube.com/embed/" + duraklar[durakNo].videoID + "?autoplay=1&rel=0";
     } else {
-        // Eğer durak numarası girilmemişse veya hatalıysa
         document.getElementById('baslik').innerText = "Yolculuk Başlıyor";
         document.getElementById('mesaj').innerText = "Hoş geldin... Lütfen sana gönderilen QR kodları sırasıyla okut.";
-        document.querySelector('.video-container').style.display = 'none'; // Videoyu gizle
+        document.querySelector('.video-container').style.display = 'none';
     }
 </script>
-
-</body>
-</html>
