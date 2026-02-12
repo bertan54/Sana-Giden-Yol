@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Durak 3: Belki Üstümüzden Bir Kuş Geçer - Sana Giden Yol</title>
+    <title>Durak 3: Belki Üstümüzden Bir Kuş Geçer - Bize Giden Yol</title>
     <style>
         * {
             margin: 0;
@@ -14,64 +14,79 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #56CCF2 0%, #2F80ED 50%, #1CB5E0 100%);
-            color: #0f3460;
+            background: linear-gradient(135deg, #56CCF2 0%, #2F80ED 50%, #1E3A8A 100%);
+            color: #1a1a2e;
             min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
         }
 
         body::before {
-            content: '🕊️';
+            content: '';
             position: absolute;
-            font-size: 3rem;
-            top: 10%;
-            left: 10%;
-            animation: fly 15s linear infinite;
-            opacity: 0.3;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+            background-size: 40px 40px;
+            animation: drift 15s linear infinite;
             z-index: 0;
         }
 
-        @keyframes fly {
+        @keyframes drift {
             0% {
                 transform: translate(0, 0);
             }
 
-            50% {
-                transform: translate(80vw, 30vh);
-            }
-
             100% {
-                transform: translate(0, 0);
+                transform: translate(40px, 40px);
             }
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
             border-radius: 30px;
             box-shadow: 0 20px 60px rgba(47, 128, 237, 0.4);
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            animation: slideUp 0.8s ease-out;
+            animation: fadeIn 1s ease-out;
         }
 
-        @keyframes slideUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: scale(0.95);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
             }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(47, 128, 237, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #56CCF2, #2F80ED);
+            width: 30%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
         }
 
         .durak-number {
@@ -88,9 +103,28 @@
 
         h1 {
             font-size: 2.2rem;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #2F80ED;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-section {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .couple-photo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            font-size: 0.95rem;
+            color: #2F80ED;
+            font-style: italic;
         }
 
         .message {
@@ -158,7 +192,7 @@
             box-shadow: 0 5px 15px rgba(47, 128, 237, 0.3);
         }
 
-        .nav-btn.next:hover {
+        .nav-btn.next:not(:disabled):hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(47, 128, 237, 0.4);
         }
@@ -169,26 +203,62 @@
             border: 2px solid #2F80ED;
         }
 
-        .nav-btn.prev:hover {
+        .nav-btn.prev:not(:disabled):hover {
             background: rgba(47, 128, 237, 0.2);
             transform: translateY(-2px);
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(47, 128, 237, 0.2);
-            border-radius: 10px;
-            margin-bottom: 25px;
-            overflow: hidden;
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #56CCF2, #2F80ED);
-            width: 30%;
+        .sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .sidebar h3 {
+            color: #2F80ED;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .song-list {
+            list-style: none;
+        }
+
+        .song-list li {
+            padding: 10px;
+            margin-bottom: 8px;
             border-radius: 10px;
-            transition: width 0.5s ease;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .song-list li.current {
+            background: linear-gradient(135deg, #56CCF2, #2F80ED);
+            color: white;
+            font-weight: bold;
+        }
+
+        .song-list li.played {
+            background: rgba(47, 128, 237, 0.1);
+            color: #666;
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
+            }
         }
 
         @media (max-width: 600px) {
@@ -208,32 +278,86 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
+    <div class="main-content">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
 
-        <span class="durak-number">DURAK 3 / 10</span>
-        <h1>🕊️ Belki Üstümüzden Bir Kuş Geçer</h1>
+            <span class="durak-number">DURAK 3 / 10</span>
+            <h1>🕊️ Belki Üstümüzden Bir Kuş Geçer</h1>
 
-        <p class="message">
-            Belki üstümüzden bir kuş geçer ve bize umut taşır...
-            Sirkeci raylarında bize bir aşk tanesi bırakır.
-            (umarım bu şarkıda kafama kuş sçtığı gelmez azcık romatik ol)
-        </p>
+            <div class="photo-section">
+                <img src="photos/photo3.svg" alt="Bizim Fotoğrafımız" class="couple-photo">
+                <p class="photo-caption">💕 Birlikte</p>
+            </div>
 
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/72nGwgu3JDg" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        </div>
+            <p class="message">
+                Belki üstümüzden bir kuş geçer ve bize umut taşır...
+                Hayat bazen beklenmedik anlarla dolu. Ama seninle her an, her anı yaşamaya değer.
+                Geleceğimiz belirsiz olabilir ama kalbim senden emin.
+            </p>
 
-        <div class="navigation">
-            <a href="durak2.html" class="nav-btn prev">← Önceki</a>
-            <a href="durak4.html" class="nav-btn next">Sonraki →</a>
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/YaeDfkWUwNE?rel=0&modestbranding=1" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="navigation">
+                <a href="durak2.html" class="nav-btn prev">← Önceki</a>
+                <a href="durak4.html" class="nav-btn next" id="nextBtn">Sonraki →</a>
+            </div>
         </div>
     </div>
+
+    <div class="sidebar">
+        <h3>🎵 Şarkı Listesi</h3>
+        <ul class="song-list">
+            <li class="played">✓ Bilir O Beni</li>
+            <li class="played">✓ Keşke</li>
+            <li class="current">▶ Belki Üstümüzden...</li>
+        </ul>
+    </div>
+
+    <script>
+        const unlockHours = {
+            1: 9, 2: 10, 3: 11, 4: 12, 5: 13,
+            6: 14, 7: 15, 8: 16, 9: 17, 10: 18
+        };
+
+        const currentDurak = 3;
+        const nextDurak = 4;
+        const nextBtn = document.getElementById('nextBtn');
+
+        function checkUnlock() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+
+            if (currentHour >= unlockHours[nextDurak]) {
+                nextBtn.style.pointerEvents = 'auto';
+                nextBtn.style.opacity = '1';
+                nextBtn.innerHTML = 'Sonraki →';
+            } else {
+                nextBtn.style.pointerEvents = 'none';
+                nextBtn.style.opacity = '0.5';
+
+                const hoursLeft = unlockHours[nextDurak] - currentHour - 1;
+                const minutesLeft = 60 - currentMinute;
+
+                if (hoursLeft === 0) {
+                    nextBtn.innerHTML = `🔒 ${minutesLeft} dakika sonra`;
+                } else {
+                    nextBtn.innerHTML = `🔒 ${unlockHours[nextDurak]}:00'da açılacak`;
+                }
+            }
+        }
+
+        checkUnlock();
+        setInterval(checkUnlock, 60000);
+    </script>
 </body>
 
 </html>
