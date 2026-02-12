@@ -1,11 +1,2 @@
-Buraya kendi mesajınızı yazın.
+Askım naber
 
-Bu dosyayı düzenleyerek Durak 1 için özel mesajınızı ekleyebilirsiniz.
-
-Örnek:
-Günaydın aşkım... Yolculuğumuz başlıyor. Bu şarkı, sabahına güneş gibi doğsun diye.
-Çünkü sen beni bilirsin, her halimle, her anımla. Ve ben de seni, kalbimin her köşesinde taşıyorum.
-
----
-Not: Bu dosyayı Notepad veya herhangi bir metin editörü ile açıp düzenleyebilirsiniz.
-HTML'de kullanmak için satır atlamak isterseniz, boş satır bırakın.
