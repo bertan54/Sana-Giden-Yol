@@ -322,15 +322,6 @@
         <h3>🎵 Şarkı Listesi</h3>
         <ul class="song-list">
             <li class="current">▶ Bilir O Beni</li>
-            <li class="locked" id="song2">🔒 Keşke</li>
-            <li class="locked">🔒 Belki Üstümüzden...</li>
-            <li class="locked">🔒 Dillere Düşeceğiz</li>
-            <li class="locked">🔒 Ara Beni Lütfen</li>
-            <li class="locked">🔒 Senden Daha Güzel</li>
-            <li class="locked">🔒 İstanbul</li>
-            <li class="locked">🔒 İstanbul'da Sonbahar</li>
-            <li class="locked">🔒 Sarılırım Birine</li>
-            <li class="locked">🔒 Bir Sevmek...</li>
         </ul>
     </div>
 
@@ -352,7 +343,6 @@
         const currentDurak = 1;
         const nextDurak = 2;
         const nextBtn = document.getElementById('nextBtn');
-        const song2 = document.getElementById('song2');
 
         function checkUnlock() {
             const now = new Date();
@@ -363,8 +353,7 @@
                 // Sonraki durak açıldı
                 nextBtn.style.pointerEvents = 'auto';
                 nextBtn.style.opacity = '1';
-                song2.className = 'locked';
-                song2.innerHTML = '🔒 Keşke (10:00\'da açılacak)';
+                nextBtn.innerHTML = 'Sonraki →';
             } else {
                 // Henüz kilitli
                 nextBtn.style.pointerEvents = 'none';
@@ -378,8 +367,6 @@
                 } else {
                     nextBtn.innerHTML = `🔒 ${unlockHours[nextDurak]}:00'da açılacak`;
                 }
-
-                song2.innerHTML = `🔒 Keşke (${unlockHours[nextDurak]}:00'da)`;
             }
         }
 
