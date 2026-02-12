@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +7,8 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fce4ec;
-            /* Romantik pembe tonu */
-            color: #880e4f;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,95 +18,134 @@
             text-align: center;
             padding: 20px;
         }
-
         .container {
             background: white;
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid #eee;
         }
-
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+        h1 { 
+            font-size: 1.8rem; 
+            margin-bottom: 15px; 
+            color: #c2185b; /* Koyu pembe başlık */
         }
-
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
+        p { 
+            font-size: 1.1rem; 
+            line-height: 1.6; 
+            margin-bottom: 25px; 
             font-style: italic;
+            color: #555;
         }
-
         .video-container {
             position: relative;
-            padding-bottom: 56.25%;
-            /* 16:9 oranı */
+            padding-bottom: 56.25%; /* 16:9 oranı */
             height: 0;
             overflow: hidden;
             border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-
         .video-container iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .kalp {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
         }
     </style>
 </head>
-
 <body>
 
-    <div class="container">
-        <h1 id="baslik">Yükleniyor...</h1>
-        <p id="mesaj">Lütfen bekleyin...</p>
-
-        <div class="video-container">
-            <iframe id="video" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
+<div class="container">
+    <span class="kalp">❤️</span>
+    <h1 id="baslik">Yükleniyor...</h1>
+    <p id="mesaj">Lütfen bekleyin...</p>
+    
+    <div class="video-container">
+        <iframe id="video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
+</div>
 
-    <script>
-        // VERİ TABANI: Her durak için bilgileri buraya gireceğiz
-        const duraklar = {
-            1: {
-                baslik: "Durak 1: Bilir O Beni",
-                mesaj: "Günaydın aşkım, yolculuğumuz başlıyor... Bu şarkı sabahına güneş gibi doğsun.",
-                videoID: "QdZqGqHq_gI" // YouTube Video ID'si (Linkin sonundaki v=... kısmı)
-            },
-            2: {
-                baslik: "Durak 2: Keşke",
-                mesaj: "Keşke şu an yanında olabilseydim ama kalbim her an orada.",
-                videoID: "VIDEO_ID_BURAYA"
-            },
-            // ... Burayı 11'e kadar dolduracağız
-            6: {
-                baslik: "Durak 6: Senden Daha Güzel",
-                mesaj: "Lütfen şimdi telefonun kamerasını aç ve kendine bak. Çünkü senden daha güzelini bulamadım.",
-                videoID: "VIDEO_ID_BURAYA"
-            }
-        };
-
-        // URL'den durak numarasını çekme (örn: site.com/?durak=1)
-        const urlParams = new URLSearchParams(window.location.search);
-        const durakNo = urlParams.get('durak');
-
-        // Sayfayı güncelleme
-        if (duraklar[durakNo]) {
-            document.getElementById('baslik').innerText = duraklar[durakNo].baslik;
-            document.getElementById('mesaj').innerText = duraklar[durakNo].mesaj;
-            // YouTube embed linki oluşturma
-            document.getElementById('video').src = "https://www.youtube.com/embed/" + duraklar[durakNo].videoID;
-        } else {
-            document.getElementById('baslik').innerText = "Hata";
-            document.getElementById('mesaj').innerText = "Böyle bir durak bulunamadı veya yolculuk bitti...";
+<script>
+    // SENİN LİSTENE GÖRE HAZIRLANMIŞ VERİ TABANI
+    const duraklar = {
+        1: {
+            baslik: "1. Durak: Bilir O Beni",
+            mesaj: "Günaydın aşkım... Çok uzaktayım ama görür o beni. Mesafeler sevgimize engel değil, yolculuğumuz başlıyor.",
+            videoID: "LZnXSIQdvhs" 
+        },
+        2: {
+            baslik: "2. Durak: Keşke",
+            mesaj: "Keşke şu an yanında olabilseydim... Bu şarkı içimdeki o en saf 'yanında olma' isteği.",
+            videoID: "_fw5GJdAbLY"
+        },
+        3: {
+            baslik: "3. Durak: Belki Üstümüzden Bir Kuş Geçer",
+            mesaj: "Hüzün yok, umut var. Hayat akıyor ve biz elbet o kuşun kanadında buluşacağız.",
+            videoID: "Ql8W_4wS9xc"
+        },
+        4: {
+            baslik: "4. Durak: Dillere Düşeceğiz",
+            mesaj: "Enerjini düşürme! Herkes bizi, aşkımızı konuşsun. Gülümse biraz :)",
+            videoID: "nYX-r6nvnNA"
+        },
+        5: {
+            baslik: "5. Durak: Ara Beni Lütfen",
+            mesaj: "Tatlı bir sitem, minik bir oyun... Sesini duymak her şeye bedel.",
+            videoID: "8McL3RNwaDY"
+        },
+        6: {
+            baslik: "6. Durak: Senden Daha Güzel",
+            mesaj: "Lütfen şu an kamerayı aç ve aynaya bak. Çünkü bu dünyada, senden daha güzelini bulamadım.",
+            videoID: "ItISVW3o0X0"
+        },
+        7: {
+            baslik: "7. Durak: İstanbul",
+            mesaj: "Sen oradasın, şehrin kalabalığında... Sana ve şehre kocaman bir selam.",
+            videoID: "aDju79MtUR8"
+        },
+        8: {
+            baslik: "8. Durak: İstanbul'da Sonbahar",
+            mesaj: "Şehrin ve aşkın en duygusal hali. Gözlerini kapat ve beni hisset.",
+            videoID: "JbOrMOTZUtM"
+        },
+        9: {
+            baslik: "9. Durak: Sarılırım Birine",
+            mesaj: "Kime sarılsam sensin... Her yerde, her şeyde sen varsın.",
+            videoID: "kPM5VXhpCfA"
+        },
+        10: {
+            baslik: "10. Durak: Bir Sevmek Bin Defa Ölmek Demekmiş",
+            mesaj: "Finalden bir önceki adım. Tutku, özlem ve aşkın en yoğun hali...",
+            videoID: "qHqJ0aL2vQw" // Barış Akarsu linkini senin için bulup ekledim
+        },
+        11: {
+            baslik: "Final: Seni Seviyorum",
+            mesaj: "Bu yolculuk hiç bitmeyecek. Sadece bugünü böyle bitirmek istedim. İyi geceler her şeyim.",
+            videoID: "S_E2EHVxNAE" // Buraya örnek romantik bir fon müziği koydum, istersen kendi videonu çekip yükleyebiliriz!
         }
-    </script>
+    };
+
+    // URL Kontrol ve İçerik Yükleme
+    const urlParams = new URLSearchParams(window.location.search);
+    const durakNo = urlParams.get('durak');
+
+    if (duraklar[durakNo]) {
+        document.getElementById('baslik').innerText = duraklar[durakNo].baslik;
+        document.getElementById('mesaj').innerText = duraklar[durakNo].mesaj;
+        // Mobilde otomatik oynatma bazen engellenir ama deniyoruz
+        document.getElementById('video').src = "https://www.youtube.com/embed/" + duraklar[durakNo].videoID + "?autoplay=1&rel=0";
+    } else {
+        // Eğer durak numarası girilmemişse veya hatalıysa
+        document.getElementById('baslik').innerText = "Yolculuk Başlıyor";
+        document.getElementById('mesaj').innerText = "Hoş geldin... Lütfen sana gönderilen QR kodları sırasıyla okut.";
+        document.querySelector('.video-container').style.display = 'none'; // Videoyu gizle
+    }
+</script>
 
 </body>
-
 </html>
